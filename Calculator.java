@@ -5,15 +5,43 @@ public class Calculator
 	private double result;
 	
 	Inputer inputer = new Inputer();
+	Saver saver = new Saver();
 	private double first;
 	private double second;
 	private char operation;
 	
 	public void operate()
 	{
-		inputer.inputValuesAndOperation();
-		first = inputer.getFirst();
-		second = inputer.getSecond();
+		if (!(saver.getPosition () == '1'))
+		{
+		inputer.inputFirstValue();
+		}
+
+		if (!(saver.getPosition () == '2'))
+		{
+		inputer.inputSecondValue();
+		}
+		
+		inputer.inputOperation();
+		
+		if (saver.getSave ()=='y' && saver.getPosition ()=='1')
+		{
+			first = result;
+		}
+		else
+		{
+			first = inputer.getFirst();
+		}
+		
+		if (saver.getSave ()=='y' && saver.getPosition ()=='2')
+		{
+			second = result;
+		}
+		else
+		{
+			second = inputer.getSecond();
+		}
+		
 		operation = inputer.getOperation();
 		switch (operation)
 		{
@@ -36,5 +64,6 @@ public class Calculator
 			default:
 				System.out.println("irregular input");
 		}
+		saver.talk ();
 	}
 }
